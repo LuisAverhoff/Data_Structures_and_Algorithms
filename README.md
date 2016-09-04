@@ -1,3 +1,3 @@
-# Stack_With_Linked_List_Implementation
+# Data Structure Implementations
 
-A simple implementation of a stack using a Linked List.
+This repository will house a collection of common data structures used in many different programming problems.
