@@ -1,12 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*Defining the node structure*/
 typedef struct node
 {
     struct node *next;
     int data;
 }node;
 
+/*Prototypes*/
 node *push(node *, int);
 node *pop(node *, int *);
 void display(node *);
