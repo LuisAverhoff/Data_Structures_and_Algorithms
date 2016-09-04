@@ -1,9 +1,0 @@
-# Ignore Everything
-*
-
-# Whitelist the following extensions
-!*.c
-!*.h
-!.gitignore
-!README.md
-!LICENSE
