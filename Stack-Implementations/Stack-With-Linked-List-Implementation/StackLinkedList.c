@@ -16,7 +16,7 @@ int isEmpty(node *);
 
 int main()
 {
-    node *head = NULL;
+    node *head = NULL; // Start a node that points to NULL. This is repersent an empty stack linked list.
     int size, element, counter = 0;
 
     printf("Enter the number of elements in the stack. ");
@@ -26,11 +26,11 @@ int main()
     {
         printf("Enter a number ");
         scanf("%d", &element);
-        head = push(head, element);
+        head = push(head, element); // add the element to the top of the stack.
         counter++;
     }
 
-    while(!isEmpty(head))
+    while(!isEmpty(head)) // Keeping poping elements off the list until the stack is empty.
     {
         display(head);
         head = pop(head, &element);
@@ -39,12 +39,12 @@ int main()
     return 0;
 }
 
-node *push(node *head, int data)
+node *push(node *head, int data)  
 {
    node *tmp = (struct node *)malloc(sizeof(struct node));
    tmp->data = data;
    tmp->next = head;
-   head = tmp;
+   head = tmp;   
    return head;
 }
 
