@@ -8,10 +8,10 @@
 */
 #define THRESHOLD 20
 
-void quickSort(void *, size_t, size_t, int (*cmp)(const void *, const void *));
-void quickSort_r(void *, int, int, size_t, int (*cmp)(const void *, const void *));
+void quickSort_h(void *, size_t, size_t, int (*cmp)(const void *, const void *));
+void quickSort(void *, int, int, size_t, int (*cmp)(const void *, const void *));
 int qSortPartition(void *, int, int, size_t, int (*cmp)(const void *, const void *));
-void insertion_sort(void *, size_t, size_t, int (*cmp)(const void *, const void *));
+void insertionSort(void *, size_t, size_t, int (*cmp)(const void *, const void *));
 int is_sorted(void *, size_t, size_t, int (*cmp)(const void *, const void *));
 int cmp(const void *, const void *);
 void Swap(void *, void *, size_t);
@@ -29,7 +29,7 @@ int main()
 
     if(numberOfElements > 1 && !is_sorted(a, numberOfElements, sizeof(int), cmp))
     {
-        quickSort(a, numberOfElements, sizeof(int), cmp);
+        quickSort_h(a, numberOfElements, sizeof(int), cmp);
     }
 
     for(i = 0; i < numberOfElements; i++)
@@ -40,10 +40,10 @@ int main()
     return 0;
 }
 
-void quickSort(void *base, size_t nitems, size_t memSize, int (*cmp)(const void *, const void *))
+void quickSort_h(void *base, size_t nitems, size_t memSize, int (*cmp)(const void *, const void *))
 {
-    quickSort_r(base, 0, nitems - 1, memSize, cmp);
-    insertion_sort(base, nitems, memSize, cmp);
+    quickSort(base, 0, nitems - 1, memSize, cmp);
+    insertionSort(base, nitems, memSize, cmp);
 }
 
 void quickSort_r(void *base, int first, int last, size_t memSize, int (*cmp)(const void *, const void *))
