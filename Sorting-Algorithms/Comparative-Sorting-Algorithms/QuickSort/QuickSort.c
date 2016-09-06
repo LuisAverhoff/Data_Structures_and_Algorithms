@@ -53,9 +53,21 @@ void quickSort_r(void *base, int first, int last, size_t memSize, int (*cmp)(con
         int pivot;
 
         pivot = qSortPartition(base, first, last, memSize, cmp);
-
-        quickSort_r(base, first, pivot - 1, memSize, cmp);
-        first = last + 1;
+        
+        /*
+          Here we are checking which is easier to recurse by looking at if the subarray on the left is shorter than the
+          one on the right and vice versa.
+        */
+        if(pivot - first < last - pivot)
+        {
+           quickSort_r(base, first, pivot - 1, memSize, cmp);
+           first = pivot + 1; 
+        }
+        else
+        {
+          quickSort_r(base, pivot + 1, last, memSize, cmp);
+          last = pivot - 1; 
+        }
     }
 }
 
