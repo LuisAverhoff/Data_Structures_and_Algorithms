@@ -108,7 +108,7 @@ int qSortPartition(void *base, int first, int last, size_t memSize, int (*cmp)(c
     return pivot;
 }
 
-void insertion_sort(void *base, size_t nitems, size_t memSize, int (*cmp)(const void *, const void *))
+void insertionSort(void *base, size_t nitems, size_t memSize, int (*cmp)(const void *, const void *))
 {
     char *carray = (char *)base;
     unsigned int i;
