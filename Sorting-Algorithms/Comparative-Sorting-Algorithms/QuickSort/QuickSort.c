@@ -12,9 +12,9 @@ void quickSort_h(void *, size_t, size_t, int (*cmp)(const void *, const void *))
 void quickSort(void *, int, int, size_t, int (*cmp)(const void *, const void *));
 int qSortPartition(void *, int, int, size_t, int (*cmp)(const void *, const void *));
 void insertionSort(void *, size_t, size_t, int (*cmp)(const void *, const void *));
-int is_sorted(void *, size_t, size_t, int (*cmp)(const void *, const void *));
+int isSorted(void *, size_t, size_t, int (*cmp)(const void *, const void *));
 int cmp(const void *, const void *);
-void Swap(void *, void *, size_t);
+void byteSwap(void *, void *, size_t);
 
 int main()
 {
@@ -27,7 +27,7 @@ int main()
 
     size_t numberOfElements = sizeof(a)/sizeof(a[0]);
 
-    if(numberOfElements > 1 && !is_sorted(a, numberOfElements, sizeof(int), cmp))
+    if(numberOfElements > 1 && !isSorted(a, numberOfElements, sizeof(int), cmp))
     {
         quickSort_h(a, numberOfElements, sizeof(int), cmp);
     }
@@ -46,7 +46,7 @@ void quickSort_h(void *base, size_t nitems, size_t memSize, int (*cmp)(const voi
     insertionSort(base, nitems, memSize, cmp);
 }
 
-void quickSort_r(void *base, int first, int last, size_t memSize, int (*cmp)(const void *, const void *))
+void quickSort(void *base, int first, int last, size_t memSize, int (*cmp)(const void *, const void *))
 {
     while(last - first > THRESHOLD) // Once we have a subarray that has less than 20 elements
     {
@@ -60,12 +60,12 @@ void quickSort_r(void *base, int first, int last, size_t memSize, int (*cmp)(con
         */
         if(pivot - first < last - pivot)
         {
-           quickSort_r(base, first, pivot - 1, memSize, cmp);
+           quickSort(base, first, pivot - 1, memSize, cmp);
            first = pivot + 1; 
         }
         else
         {
-          quickSort_r(base, pivot + 1, last, memSize, cmp);
+          quickSort(base, pivot + 1, last, memSize, cmp);
           last = pivot - 1; 
         }
     }
@@ -87,7 +87,7 @@ int qSortPartition(void *base, int first, int last, size_t memSize, int (*cmp)(c
     }
     
     // Put the pivot at the front of the list.
-    Swap(&carray[pivot * memSize], &carray[first * memSize], memSize);
+    byteSwap(&carray[pivot * memSize], &carray[first * memSize], memSize);
     pivot = first;
 
     while(first < last)
@@ -95,7 +95,7 @@ int qSortPartition(void *base, int first, int last, size_t memSize, int (*cmp)(c
         // if the value we have is less than the element at the end, move the pivot up by 1, else move first.
         if(cmp(&carray[first * memSize], &carray[last * memSize]) <= 0)
         {
-            Swap(&carray[pivot * memSize], &carray[first * memSize], memSize);
+            byteSwap(&carray[pivot * memSize], &carray[first * memSize], memSize);
             pivot++;
         }
 
@@ -103,7 +103,7 @@ int qSortPartition(void *base, int first, int last, size_t memSize, int (*cmp)(c
     }
     
     // finally swap the pivot with the last element. At this point, all elements to the left of the pivot are less than it and vice versa.
-    Swap(&carray[pivot * memSize], &carray[last * memSize], memSize);
+    byteSwap(&carray[pivot * memSize], &carray[last * memSize], memSize);
 
     return pivot;
 }
@@ -119,13 +119,13 @@ void insertionSort(void *base, size_t nitems, size_t memSize, int (*cmp)(const v
         j = i;
         while(j > 0 && cmp(&carray[j * memSize], &carray[(j - 1) * memSize]) < 0)
         {
-            Swap(&carray[j * memSize], &carray[(j - 1) * memSize], memSize);
+            byteSwap(&carray[j * memSize], &carray[(j - 1) * memSize], memSize);
             j--;
         }
     }
 }
 
-int is_sorted(void *base, size_t nitems, size_t memSize, int (*cmp)(const void *, const void *))
+int isSorted(void *base, size_t nitems, size_t memSize, int (*cmp)(const void *, const void *))
 {
     char *carray = (char *)base;
     unsigned int i;
@@ -150,7 +150,7 @@ int cmp(const void *a, const void *b)
 }
 
 // The main way that this function is swapping is by swapping out the bytes in each iteration.
-void Swap(void *a, void *b, size_t memSize)
+void byteSwap(void *a, void *b, size_t memSize)
 {
     char tmp;
     char *aa = a, *bb = b;
