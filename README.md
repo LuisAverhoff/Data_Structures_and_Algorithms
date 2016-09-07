@@ -1,6 +1,4 @@
-This is another comment
 # Data Structures and Algorithms Implementations
-Test for comparison
 This repository will house a collection of common data structures and algorithms used to solve many different programming problems. This can range from:
 
 - List(ArrayList, LinkedList etc)
