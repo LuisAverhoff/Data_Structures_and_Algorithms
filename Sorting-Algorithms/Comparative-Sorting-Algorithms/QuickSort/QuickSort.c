@@ -42,7 +42,7 @@ int main()
 void quickSort_h(void *base, size_t nitems, size_t memSize, int (*cmp)(const void *, const void *))
 {
     quickSort(base, 0, nitems - 1, memSize, cmp);
-    /*insertionSort(base, nitems, memSize, cmp);*/
+    insertionSort(base, nitems, memSize, cmp);
 }
 
 /*
