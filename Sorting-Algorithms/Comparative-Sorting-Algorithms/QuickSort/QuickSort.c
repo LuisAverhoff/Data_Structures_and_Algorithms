@@ -51,7 +51,7 @@ void quickSort_h(void *base, size_t nitems, size_t memSize, int (*cmp)(const voi
 */
 void quickSort(void *base, int first, int last, size_t memSize, int (*cmp)(const void *, const void *))
 {
-    while(first < last)
+    while(last - first > THRESHOLD)
     {
         int pivot;
 
