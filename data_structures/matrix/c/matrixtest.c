@@ -1,22 +1,37 @@
-#include "matrix.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include "Matrix.h"
 
+int main(int argc, char* argv[])
+{
+    matrix mat;
+    int i, j, element; /*Change element to the appropriate data type you will be workng with.*/
+    const int ROWS = atoi(argv[1]);
+    const int COL = atoi(argv[2]);
 
-int main(int argc, char* argv[]){
+    creatematrix(&mat, ROWS, COL, sizeof(int)); /*You can change sizeof() for any data type you want(integers, char arrays.)*/
 
-const int rows = atoi(argv[1]);
-const int columns = atoi(argv[2]);
-int** list  ;
-// int arrayOfArray[rows][columns] ;
-char* name = "Daniel" ; 
+    for(i = 0; i < ROWS; i++)
+    {
+        for(j = 0; j < COL; j++)
+        {
+            scanf(" %d", &element);
+            setElement(&mat, i, j, &element);
+        }
+    }
 
+    printf("\n");
 
-iMatrix test = createIntMatrix(list , rows, columns, name);
+    for(i = 0; i < ROWS; i++)
+    {
+        for(j = 0; j < COL; j++)
+        {
+            printf("%d ", *(int*)getElement(&mat, i, j)); /*Returns void * so I must cast it to the appropriate type.*/
+        }
+        printf("\n");
+    }
 
+    freematrix(&mat);
 
-
-printComponents(test); 
-
-
-return 0;
-
+    return 0;
 }
