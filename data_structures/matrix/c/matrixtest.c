@@ -23,6 +23,10 @@ int main(int argc, char* argv[])
     {
         for(j = 0; j < COL; j++)
         {
+            /*
+               Note, when ever you decide to use scanf, make sure that first character you enter is a space else
+               a newline will be consumed in the process.
+             */
             scanf(" %d", &element);
             setElement(&mat, i, j, &element);
         }
