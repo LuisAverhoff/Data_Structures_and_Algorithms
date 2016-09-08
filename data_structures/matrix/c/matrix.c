@@ -1,61 +1,41 @@
 #include <stdio.h>
-#include "matrix.h"
+#include <stdlib.h>
+#include <string.h>
+#include "Matrix.h"
 
+int creatematrix(matrix *mat, size_t rows, size_t columns, size_t memSize)
+{
+    void **data = calloc(rows * columns, memSize);
 
+    if(data != NULL) /*In case calloc fails*/
+    {
+        mat->rows = rows;
+        mat->columns = columns;
+        mat->memSize = memSize;
+        mat->data = data;
+        return 1;
+    }
 
-/*Takes in two integer arrays and two integer arguments each specifying the
-number of rows and columns, respectively. Ex. n x m matrix*/
-iMatrix createIntMatrix(int** array, const int n, const int m, char* name){
-
-	int i ;
-	int j ;
-		
-		
-	iMatrix new ;
-	new.rows = n ; 
-	new.columns = m ;
-	new.name = name ; 
-		
-
-	for(i = 0 ; i < n ; i++ ){
-		
-	
-		for (j = 0; j < m ; j++){
-			new.list[i][j] = 1 ; 
-		}
-
-	
-	
-	}
-		
-	return new ; 
-	
+    return 0;
 }
 
+void setElement(matrix *mat, size_t x, size_t y, void *data)
+{
+    /*
+       Remember this formula. (i * numOfColumns) * j to traverse a 2D array in a 1D fashion.
+       We are also multiplying by the appropriate memory size because different type have different memory size.
+    */
+    size_t offset = (x * mat->columns * mat->memSize) + (y * mat->memSize);
+    memcpy(mat->data + offset, data, mat->memSize);
+}
 
-void printComponents(iMatrix matrix){
-	int i = 0 ; 
-	int j = 0 ; 
+void *getElement(matrix *mat, size_t x, size_t y)
+{
+    size_t offset = (x * mat->columns * mat->memSize) + (y * mat->memSize);
+    return mat->data + offset;
+}
 
-	
-	
-	for(i = 0 ; i < matrix.rows ; i++ ){
-		
-		/*Formatting*/
-		for (j = 0; j < matrix.columns ; j++){
-			
-			if(j !=(matrix.columns-1)){			
-				printf("%d , ", matrix.list[i][j]);
-			}
-			else{
-				printf("%d", matrix.list[i][j]);
-			}
-		}
-	
-	printf("\n");
-
-	
-	
-	}
-	
+void freematrix(matrix *mat)
+{
+    free(mat);
 }
