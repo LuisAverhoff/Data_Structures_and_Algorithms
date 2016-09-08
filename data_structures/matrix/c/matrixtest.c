@@ -27,8 +27,13 @@ int main(int argc, char* argv[])
                Note, when ever you decide to use scanf, make sure that first character you enter is a space else
                a newline will be consumed in the process.
              */
-            scanf(" %d", &element);
-            setElement(&mat, i, j, &element);
+            errCheck = scanf(" %d", &element);
+            
+            /*Make sure that scanf did not fail. Scanf returns an integer based on the number of successful entries. */
+            if(errCheck == 1)
+            {
+              setElement(&mat, i, j, &element);   
+            }
         }
     }
 
