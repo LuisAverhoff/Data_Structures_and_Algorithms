@@ -16,7 +16,7 @@ int creatematrix(matrix *mat, size_t rows, size_t columns, size_t memSize)
         return 1;
     }
 
-    return 0;
+    return -1;
 }
 
 void setElement(matrix *mat, size_t x, size_t y, void *data)
