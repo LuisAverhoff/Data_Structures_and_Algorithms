@@ -23,7 +23,7 @@ int main()
     size_t numberOfElements = sizeof(a)/sizeof(a[0]);
 
     /*
-     No point in performing quick sort if it does not have more than 1 elements and if
+     No point in performing quick sort if it does not have more than 1 element and if
      the array is sorted.
     */
     if(numberOfElements > 1 && !isSorted(a, numberOfElements, sizeof(int), cmp))
