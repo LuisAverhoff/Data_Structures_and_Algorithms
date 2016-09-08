@@ -9,7 +9,7 @@ int main(int argc, char* argv[])
     const int ROWS = atoi(argv[1]);
     const int COL = atoi(argv[2]);
 
-    /*You can change sizeof() for any data type you want(integers, char arrays.)*/
+    /*You can change sizeof() for any data type you want(integers, char arrays etc)*/
     errCheck = creatematrix(&mat, ROWS, COL, sizeof(int));
     
     /*If we were not able to successfully allocate memory*/
@@ -34,7 +34,8 @@ int main(int argc, char* argv[])
     {
         for(j = 0; j < COL; j++)
         {
-            printf("%d ", *(int*)getElement(&mat, i, j)); /*Returns void * so I must cast it to the appropriate type.*/
+            /*Returns void * so I must cast it to the appropriate type.*/
+            printf("%d ", *(int*)getElement(&mat, i, j));
         }
         printf("\n");
     }
