@@ -1,24 +1,23 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include <stdio.h> // for input and output (printf)
+#include <string.h> //for assignment of strings and names
+#include <stdlib.h> //for atoi(char*) function 
+#include <limits.h> //for int min/max
 
-#define DEFAULTROWS	4
-#define DEFAULTCOLUMNS	4
+
 
 /*Typedef declaration for integer matrix*/
 
 struct imatrix {
-char* matrixName ; 
-const int rows ; 
-const int columns ;
-int array[DEFAULTROWS][DEFAULTCOLUMNS] ;  	
-
+char* name ; 
+int rows ; 
+int columns ;
+int list[100][100] ;
 
 };
 
 typedef struct imatrix iMatrix ;
 
 
-iMatrix createIntMatrix(int **, const int, const int);
+iMatrix createIntMatrix(int **, const int, const int, char*);
 
-void printComponents(iMatrix,const int,const int);
+void printComponents(iMatrix);
