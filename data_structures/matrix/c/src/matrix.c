@@ -23,7 +23,7 @@ void setElement(matrix *mat, size_t x, size_t y, void *data)
 {
     /*
        Remember this formula. (i * numOfColumns) + j to traverse a 2D array in a 1D fashion(This formula only applies to Row Major Order Arrays).
-       We are also multiplying by the appropriate memory size because different type of data have different memory size.
+       We are also multiplying by the appropriate memory size because different types of data have different memory sizes.
     */
     size_t offset = (x * mat->columns * mat->memSize) + (y * mat->memSize);
     memcpy(mat->data + offset, data, mat->memSize);
