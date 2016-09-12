@@ -9,9 +9,9 @@ typedef struct Matrix
     size_t memSize;
 }matrix;
 
-int creatematrix(matrix *, size_t, size_t, size_t);
+int createMatrix(matrix *, size_t, size_t, size_t);
 void *getElement(matrix *, size_t, size_t);
 void setElement(matrix *, size_t, size_t, void *);
-void freematrix(matrix *);
+void freeMatrix(matrix *);
 
 #endif /* Matrix_H_INCLUDED */
