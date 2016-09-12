@@ -1,5 +1,5 @@
-#ifndef Matrix_H_INCLUDED
-#define Matrix_H_INCLUDED
+#ifndef MATRIX_H_INCLUDED
+#define MATRIX_H_INCLUDED
 
 typedef struct Matrix
 {
@@ -9,9 +9,9 @@ typedef struct Matrix
     size_t memSize;
 }matrix;
 
-int createMatrix(matrix *, size_t, size_t, size_t);
-void *getElement(matrix *, size_t, size_t);
-void setElement(matrix *, size_t, size_t, void *);
+int createMatrix(matrix *, const size_t, const size_t, const size_t);
+void *getElement(matrix *, const size_t, const size_t);
+void setElement(matrix *, const size_t, const size_t, const void *);
 void freeMatrix(matrix *);
 
-#endif /* Matrix_H_INCLUDED */
+#endif /* MATRIX_H_INCLUDED */
