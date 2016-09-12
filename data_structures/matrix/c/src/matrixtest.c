@@ -10,7 +10,7 @@ int main(int argc, char* argv[])
     const int COL = atoi(argv[2]);
 
     /*You can change sizeof() for any data type you want(integers, char arrays etc)*/
-    errCheck = creatematrix(&mat, ROWS, COL, sizeof(int));
+    errCheck = createMatrix(&mat, ROWS, COL, sizeof(int));
     
     /*If we were not able to successfully allocate memory*/
     if(errCheck == -1)
@@ -49,7 +49,7 @@ int main(int argc, char* argv[])
         printf("\n");
     }
 
-    freematrix(&mat);
+    freeMatrix(&mat);
 
     return 0;
 }
