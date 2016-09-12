@@ -6,8 +6,8 @@
 
 int createMatrix(matrix *mat, size_t rows, size_t columns, size_t memSize)
 {
-    assert(mat);
-    assert(!mat->data);
+    assert(mat); /* Should not be null at this point. */
+    assert(!mat->data); /* Should not have any more allocated to it at this point. */
     void **data = calloc(rows * columns, memSize);
 
     if(data != NULL) /*In case calloc fails*/
