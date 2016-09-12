@@ -5,6 +5,11 @@
 
 int createMatrix(matrix *mat, size_t rows, size_t columns, size_t memSize)
 {
+    if(rows < 0 || columns < 0)
+    {
+        return -1;
+    }
+    
     void **data = calloc(rows * columns, memSize);
 
     if(data != NULL) /*In case calloc fails*/
