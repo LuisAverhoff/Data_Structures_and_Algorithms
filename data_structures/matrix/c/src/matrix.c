@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <assert.h>
 #include "Matrix.h"
 
-int creatematrix(matrix *mat, size_t rows, size_t columns, size_t memSize)
+int createMatrix(matrix *mat, size_t rows, size_t columns, size_t memSize)
 {
+    assert(mat);
+    assert(!mat->data);
     void **data = calloc(rows * columns, memSize);
 
     if(data != NULL) /*In case calloc fails*/
@@ -35,7 +38,11 @@ void *getElement(matrix *mat, size_t x, size_t y)
     return mat->data + offset;
 }
 
-void freematrix(matrix *mat)
+void freeMatrix(matrix *mat)
 {
-    free(mat);
+    if(mat != NULL)
+    {
+        free(mat->data);
+        *mat = {NULL, 0, 0, mat->memSize};
+    }
 }
