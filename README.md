@@ -39,7 +39,7 @@ Binary Search is an algorithm that finds the position of a value within a **sort
 Procedure:
 
 - Calculate the midpoint i.e **low + ((high - low) / 2)**. This instead of (high + low) / 2 lessen the possibility of getting an overflow.
-- If the element that you're are looking is less than the element in the middle, then you know that the element has to be to teh left given the fact that the array is sorted. The same logic applies if the element was greater than the element in the middle.
+- If the element that you're are looking is less than the element in the middle, then you know that the element has to be to the left of the array given the fact that the array is sorted. The same logic applies if the element was greater than the element in the middle.
 - Apply step 1 and 2 until you find the element that you are looking for or your search space becomes zero.
 
 Binary search in the worst case performs in big-oh of **LogN** and uses big-oh of **1** space. The reason for this is because in each iteration, we are essentially splitting up our search in half(N/2)
