@@ -30,3 +30,16 @@ Procedure:
 - choose a pivot either randomly, by finding the median of the first, middle and last element, or simply choose either the leftmost , middle or rightmost element as the pivot.
 - Partition the list so that all elements less than the pivot are to the left of it and all elements that are greater than the pivot are to the right of it.
 - Recursively apply the first two steps until your subarray has only one element left.
+
+
+### Binary Search
+
+Binary Search is an algorithm that finds the position of a value within a **sorted array**. It is one of the fastest search algorithm with the constraint that the array is sorted.
+
+Procedure:
+
+- Calculate the midpoint i.e **low + ((high - low) / 2)**. This instead of (high + low) / 2 lessen the possibility of getting an overflow.
+- If the element that you're are looking is less than the element in the middle, then you know that the element has to be to teh left given the fact that the array is sorted. The same logic applies if the element was greater than the element in the middle.
+- Apply step 1 and 2 until you find the element that you are looking for or your search space becomes zero.
+
+Binary search in the worst case performs in big-oh of **LogN** and uses big-oh of **1** space. The reason for this is because in each iteration, we are essentially splitting up our search in half(N/2)
