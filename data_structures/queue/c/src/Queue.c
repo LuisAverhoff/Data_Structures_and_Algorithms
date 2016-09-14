@@ -1,47 +1,120 @@
-#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
 #include "Queue.h"
 
-int main()
+struct Node
 {
-    int val, errCheck;
-    Queue q;
+    void *data;
+    struct Node *next;
+};
 
-    Queue_Init(&q, sizeof(int));
-
-    for(val = 0; val < 10; val++)
+void Queue_Init(Queue *q, size_t memSize)
+{
+    /*Does not make sense to create a queue with each element having a memory size of 0*/
+    if(q->memSize != 0)
     {
-        errCheck = enqueue(&q, &val);
+        q->sizeOfQueue = 0;
+        q->memSize = memSize;
+        q->head = q->tail = NULL;
+    }
+}
 
-        if(errCheck)
+int enqueue(Queue *q, const void *data)
+{
+    node *newNode = (node *)malloc(sizeof(node));
+
+    if(newNode == NULL)
+    {
+        return false;
+    }
+
+    newNode->data = malloc(q->memSize);
+
+    if(newNode->data == NULL)
+    {
+        free(newNode);
+        return false;
+    }
+
+    newNode->next = NULL;
+
+    memcpy(newNode->data, data, q->memSize);
+
+    if(isQueueEmpty(q))
+    {
+        q->head = q->tail = newNode;
+    }
+    else
+    {
+        q->tail->next = newNode;
+        q->tail = newNode;
+    }
+
+    q->sizeOfQueue++;
+    return true;
+}
+
+void dequeue(Queue *q, void *data)
+{
+    if(!isQueueEmpty(q))
+    {
+        node *temp = q->head;
+        memcpy(data, temp->data, q->memSize);
+
+        if(q->sizeOfQueue > 1)
         {
-            printf("The value %d has been enqueued.\n", val + 1);
+            q->head = q->head->next;
         }
         else
         {
-            printf("Couldn't enqueue because of a memory failure. \n");
-            printf("Freeing up resources and exiting.");
-            Queue_Clear(&q);
-            exit(EXIT_FAILURE);
+            q->head = NULL;
+            q->tail = NULL;
         }
+
+        q->sizeOfQueue--;
+        free(temp->data);
+        free(temp);
     }
+}
 
-    printf("\n");
-
-    int *valPtr = Queue_Peek(&q);
-
-    if(valPtr != NULL)
+void  *Queue_Peek(const Queue *q)
+{
+    if(!isQueueEmpty(q))
     {
-        printf("The value that is at the front of the queue is %d\n\n", *valPtr + 1);
+        return q->head->data;
     }
 
-    while(q.sizeOfQueue > 0)
+    return NULL;
+}
+
+void Queue_Clear(Queue *q)
+{
+    if(!isQueueEmpty(q))
     {
-        dequeue(&q, &val);
-        printf("%d has been dequeued.\n", val + 1);
+        node *temp;
+
+        while(!isQueueEmpty(q))
+        {
+            temp = q->head;
+            q->head = temp->next;
+            free(temp->data);
+            free(temp);
+            q->sizeOfQueue--;
+        }
+
+        q->head = q->tail = NULL;
+        q->memSize = 0;
     }
 
-    printf("\nThe queue is now empty.\n");
+}
 
-    return 0;
+int isQueueEmpty(const Queue *q)
+{
+    return (q->sizeOfQueue == 0) ? 1 : 0;
+}
+
+int Queue_GetSize(const Queue *q)
+{
+    return q->sizeOfQueue;
 }
