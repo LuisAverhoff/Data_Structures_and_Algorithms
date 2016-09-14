@@ -35,7 +35,7 @@ int main()
         printf("The value that is at the front of the queue is %d\n\n", *valPtr + 1);
     }
 
-    while(q.sizeOfQueue > 0)
+    while(!isQueueEmpty(&q))
     {
         dequeue(&q, &val);
         printf("%d has been dequeued.\n", val + 1);
