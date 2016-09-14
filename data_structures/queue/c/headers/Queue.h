@@ -16,6 +16,7 @@ int enqueue(Queue *, const void *); /*Push the element to the end of the queue.*
 void dequeue(Queue *, void *); /*Pops the last element that entered the queue.*/
 void *Queue_Peek(const Queue *); /*Reads the element that is at the end of the Queue.*/
 void Queue_Clear(Queue *); /*Removes all the elements in the Queues*/
+int isQueueEmpty(const Queue *); /*Checks if the Queue is empty.*/
 int Queue_GetSize(const Queue *); /*Returns the current size of the Queue.*/
 
 #endif
