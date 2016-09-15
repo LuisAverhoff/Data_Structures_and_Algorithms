@@ -84,7 +84,7 @@ int qSortPartition(void *base, int first, int last, size_t memSize, int (*cmp)(c
     char *firstPtr = start + (first * memSize);
     char *lastPtr = start + (last * memSize);
 
-    int mid = first + (last - first) / 2;
+    int mid = first + ((last - first) / 2;)
     char *midPtr = start + (mid * memSize);
 
     /* Find the larger of the two */
