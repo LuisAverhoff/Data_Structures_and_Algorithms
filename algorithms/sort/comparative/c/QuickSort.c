@@ -103,7 +103,7 @@ int qSortPartition(void *base, int first, int last, size_t memSize, int (*cmp)(c
     pivot = first;
     pivotPtr = start + (pivot * memSize);
 
-    while(last - first > THRESHOLD)
+    while(first < last)
     {
         /*
            if the value we have is less than the element at the lastPtr,  move the pivot up
