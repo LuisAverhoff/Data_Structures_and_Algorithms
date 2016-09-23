@@ -8,11 +8,5 @@
 #define THRESHOLD 10
 
 void quickSort_h(void *, size_t, size_t, int (*cmp)(const void *, const void *));
-void quickSort(void *, int, int, size_t, int (*cmp)(const void *, const void *));
-int medianOfThree(void *, int , int, size_t, int (*cmp)(const void *, const void *));
-int qSortPartition(void *, int, int, int, size_t, int (*cmp)(const void *, const void *));
-void insertionSort(void *, size_t, size_t, int (*cmp)(const void *, const void *));
-int isSorted(void *, size_t, size_t, int (*cmp)(const void *, const void *));
-void byteSwap(void *, void *, size_t);
 
 #endif
