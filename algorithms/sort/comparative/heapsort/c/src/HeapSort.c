@@ -2,6 +2,12 @@
 #include <stdlib.h>
 #include "HeapSort.h"
 
+static void buildHeap(void *, size_t, size_t, int (*cmp)(const void *, const void *));
+static void siftDown(void *, int, int, size_t, int (*cmp)(const void *, const void *));
+static int childSearch(void *, int, int, size_t, int (*cmp)(const void *, const void *));
+static int calParentIndex(int);
+static int calLeftChildIndex(int);
+
 void heapSort(void *base, size_t nitems, size_t memSize, int (*cmp)(const void *, const void *))
 {
     /*
