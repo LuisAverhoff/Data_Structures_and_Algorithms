@@ -12,7 +12,7 @@ void quickSort_h(void *base, size_t nitems, size_t memSize, int (*cmp)(const voi
   Here we are doing a tail recurse optimization and using our threshold value(20) to know
   when to move to Insertion Sort.
 */
-void quickSort(void *base, int first, int last, size_t memSize, int (*cmp)(const void *, const void *))
+static void quickSort(void *base, int first, int last, size_t memSize, int (*cmp)(const void *, const void *))
 {
     while(last - first < THRESHOLD)
     {
@@ -39,7 +39,7 @@ void quickSort(void *base, int first, int last, size_t memSize, int (*cmp)(const
 /*
     We compare the first, middle and last element and swap elements accordingly
 */
-int medianOfThree(void *base, int first, int last, size_t memSize, int (*cmp)(const void *, const void *))
+static int medianOfThree(void *base, int first, int last, size_t memSize, int (*cmp)(const void *, const void *))
 {
     int mid = first + ((last - first) / 2); /*Makes it less lightly for overflow to occur.*/
 
@@ -59,7 +59,7 @@ int medianOfThree(void *base, int first, int last, size_t memSize, int (*cmp)(co
     return last - 1;
 }
 
-int qSortPartition(void *base, int first, int last, int medianPivot, size_t memSize, int (*cmp)(const void *, const void *))
+static int qSortPartition(void *base, int first, int last, int medianPivot, size_t memSize, int (*cmp)(const void *, const void *))
 {
     int i;
     char *currentPtr;
@@ -86,7 +86,7 @@ int qSortPartition(void *base, int first, int last, int medianPivot, size_t memS
     return pivotIndex;
 }
 
-void insertionSort(void *base, size_t nitems, size_t memSize, int (*cmp)(const void *, const void *))
+static void insertionSort(void *base, size_t nitems, size_t memSize, int (*cmp)(const void *, const void *))
 {
     char *start = base;
     char *lastPtr = start + (nitems * memSize);
