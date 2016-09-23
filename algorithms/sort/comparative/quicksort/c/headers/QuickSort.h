@@ -7,8 +7,10 @@
 */
 #define THRESHOLD 10
 
-void quickSort_h(void *, size_t, size_t, int (*cmp)(const void *, const void *));
-int isSorted(void *, size_t, size_t, int (*cmp)(const void *, const void *));
+typedef int (*cmp_t)(const void *, const void *);
+
+void quickSort_h(void *, size_t, size_t, cmp_t);
+int isSorted(void *, size_t, size_t, cmpt_t);
 void byteSwap(void *, void *, size_t);
 
 #endif
