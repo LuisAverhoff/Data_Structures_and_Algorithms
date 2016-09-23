@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include "HeapSort.h"
 
-static void buildHeap(void *, size_t, size_t, int (*cmp)(const void *, const void *));
-static void siftDown(void *, int, int, size_t, int (*cmp)(const void *, const void *));
-static int childSearch(void *, int, int, size_t, int (*cmp)(const void *, const void *));
+static void buildHeap(void *, size_t, size_t, cmp_t);
+static void siftDown(void *, int, int, size_t, cmp_t);
+static int childSearch(void *, int, int, size_t, cmp_t);
 static int calParentIndex(int);
 static int calLeftChildIndex(int);
 
