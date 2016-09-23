@@ -2,6 +2,11 @@
 #include <stdlib.h>
 #include "QuickSort.h"
 
+static quickSort(void *, int, int, size_t, cmp_t);
+static medianOfThree(void *, int , int, size_t, cmp_t);
+static qSortPartition(void *, int, int, int, size_t, cmp_t);
+static void insertionSort(void *, size_t, size_t, cmp_t);
+
 void quickSort_h(void *base, size_t nitems, size_t memSize, int (*cmp)(const void *, const void *))
 {
     quickSort(base, 0, nitems - 1, memSize, cmp);
