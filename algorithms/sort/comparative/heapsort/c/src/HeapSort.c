@@ -20,7 +20,7 @@ void heapSort(void *base, size_t nitems, size_t memSize, int (*cmp)(const void *
     }
 }
 
-void buildHeap(void *base, size_t nitems, size_t memSize, int (*cmp)(const void *, const void *))
+static void buildHeap(void *base, size_t nitems, size_t memSize, int (*cmp)(const void *, const void *))
 {
     int start = calParentIndex(nitems - 1); /*This will get us the parent node in some subtree.*/
 
@@ -31,7 +31,7 @@ void buildHeap(void *base, size_t nitems, size_t memSize, int (*cmp)(const void 
     }
 }
 
-void siftDown(void *base, int start, int end, size_t memSize, int (*cmp)(const void *, const void *))
+static void siftDown(void *base, int start, int end, size_t memSize, int (*cmp)(const void *, const void *))
 {
     int childIndex = childSearch(base, start, end, memSize, cmp); /*Finds the maximum child down the heap.*/
 
@@ -54,7 +54,7 @@ void siftDown(void *base, int start, int end, size_t memSize, int (*cmp)(const v
     }
 }
 
-int childSearch(void *base, int start, int end, size_t memSize, int (*cmp)(const void *, const void *))
+static int childSearch(void *base, int start, int end, size_t memSize, int (*cmp)(const void *, const void *))
 {
     int currIndex = start;
     int leftChildIndex = calLeftChildIndex(currIndex);
@@ -80,12 +80,12 @@ int childSearch(void *base, int start, int end, size_t memSize, int (*cmp)(const
     return currIndex;
 }
 
-int calParentIndex(int index)
+static int calParentIndex(int index)
 {
     return ((index - 1) / 2);
 }
 
-int calLeftChildIndex(int index)
+static int calLeftChildIndex(int index)
 {
     return ((2 * index) + 1);
 }
