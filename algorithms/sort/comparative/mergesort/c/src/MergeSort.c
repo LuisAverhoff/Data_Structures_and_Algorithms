@@ -4,7 +4,7 @@
 #include "MergeSort.h"
 
 static void mergeSort_recurse(void *, void *, int, int, size_t, cmp_t);
-static void merge(void *, void *, int, int, int, size_t, cmp_t);
+static void merge_top(void *, void *, int, int, int, size_t, cmp_t);
 static void insertionSort(void *, size_t, size_t, cmp_t);
 
 void mergeSort(void *base, size_t nitems, size_t memSize, cmp_t cmp)
@@ -25,11 +25,11 @@ void mergeSort(void *base, size_t nitems, size_t memSize, cmp_t cmp)
     }
 }
 
-static void mergeSort_recurse(void *base, void *tempArr, int start, int end, size_t memSize, cmp_t cmp)
+static void mergeSort_recurse(void *base, void *tempArr, int start, int last, size_t memSize, cmp_t cmp)
 {
-    if(end - start < THRESHOLD) return;
+    if(last - start < THRESHOLD) return;
 
-    int splitIndex = start + ((end - start) / 2); /*Makes it less likely for an overflow to occur.*/
+    int splitIndex = start + ((last - start) / 2); /*Makes it less likely for an overflow to occur.*/
 
     /*
         Break the array into two sub arrays; one which the represents the left most side of the array up
@@ -38,11 +38,11 @@ static void mergeSort_recurse(void *base, void *tempArr, int start, int end, siz
         sub array until our array is sorted.
     */
     mergeSort_recurse(base, tempArr, start, splitIndex, memSize, cmp);
-    mergeSort_recurse(base, tempArr, splitIndex + 1, end, memSize, cmp);
-    merge(base, tempArr, start, splitIndex, end, memSize, cmp);
+    mergeSort_recurse(base, tempArr, splitIndex + 1, last, memSize, cmp);
+    merge_top(base, tempArr, start, splitIndex, last, memSize, cmp);
 }
 
-static void merge(void *base, void *tempArr, int start, int splitIndex, int end, size_t memSize, cmp_t cmp)
+static void merge_top(void *base, void *tempArr, int start, int splitIndex, int last, size_t memSize, cmp_t cmp)
 {
     char *leftElement;
     char *rightElement;
@@ -53,12 +53,12 @@ static void merge(void *base, void *tempArr, int start, int splitIndex, int end,
     int tempArrIndex = start; /*Starting index for the temp array. */
 
     /*while we haven't reached the end of either the left or right sub array. */
-    while(leftIndex <= splitIndex && rightIndex <= end)
+    while(leftIndex <= splitIndex && rightIndex <= last)
     {
         leftElement = ((char *)base + (leftIndex * memSize)); /*offsetting to the element at left and right Index.*/
         rightElement = ((char *)base + (rightIndex * memSize));
 
-        if(cmp(leftElement, rightElement) < 0)
+        if(cmp(leftElement, rightElement) <= 0)
         {
             tempElement = ((char *)tempArr + (tempArrIndex * memSize));
             memcpy(tempElement, leftElement, memSize);
@@ -87,7 +87,7 @@ static void merge(void *base, void *tempArr, int start, int splitIndex, int end,
         tempArrIndex++;
     }
 
-    while(rightIndex <= end)
+    while(rightIndex <= last)
     {
         rightElement = ((char *)base + (rightIndex * memSize));
         tempElement = ((char *)tempArr + (tempArrIndex * memSize));
@@ -97,7 +97,7 @@ static void merge(void *base, void *tempArr, int start, int splitIndex, int end,
     }
 
 
-    for(leftIndex = start; leftIndex <= end; leftIndex++)
+    for(leftIndex = start; leftIndex <= last; leftIndex++)
     {
         leftElement = ((char *)base + (leftIndex * memSize));
         tempElement = ((char *)tempArr + (leftIndex * memSize));
