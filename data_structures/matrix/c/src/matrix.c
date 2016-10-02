@@ -5,17 +5,25 @@
 
 int createMatrix(matrix *mat, const size_t rows, const size_t columns, const size_t memSize)
 {
-    void **data = calloc(rows * columns, memSize);
+    void **data = calloc(rows, sizeof(void *));
 
-    if(data != NULL) /*In case calloc fails*/
+    if(data != NULL)
     {
+        size_t i;
+
         mat->rows = rows;
         mat->columns = columns;
         mat->memSize = memSize;
         mat->data = data;
+
+
+        for (i = 0; i < rows; i++)
+        {
+            mat->data[i] = calloc(columns, memSize);
+        }
+
         return 1;
     }
-
     return -1;
 }
 
@@ -24,21 +32,28 @@ void setElement(matrix *mat, const size_t x, const size_t y, const void *data)
     /*
        Remember this formula. (i * numOfColumns) + j to traverse a 2D array in a 1D fashion(This formula only applies to Row Major Order Arrays).
     */
-    size_t offset = (x * mat->columns) + y;
+    size_t offset = ((x * mat->columns) + y) * mat->memSize;
     memcpy(mat->data + offset, data, mat->memSize);
 }
 
 void *getElement(matrix *mat, const size_t x, const size_t y)
 {
-    size_t offset = (x * mat->columns) + y;
-    return mat->data + (offset * mat->memSize);
+    size_t offset = ((x * mat->columns) + y) * mat->memSize;
+    return mat->data + offset;
 }
 
 void freeMatrix(matrix *mat)
 {
     if(mat->data != NULL)
     {
-       /*Set back every back to their default values to preserve invariants.*/
+        /*Set back every back to their default values to preserve invariants.*/
+        size_t i;
+
+        for (i = 0; i < mat->rows; i++)
+        {
+            free(mat->data[i]);
+        }
+
         free(mat->data);
         mat->data = NULL;
         mat->rows = 0;
@@ -46,4 +61,3 @@ void freeMatrix(matrix *mat)
         mat->memSize = 0;
     }
 }
-
