@@ -3,7 +3,7 @@
 
 typedef struct Matrix
 {
-    void **data;
+    void *data;
     size_t rows;
     size_t columns;
     size_t memSize;
