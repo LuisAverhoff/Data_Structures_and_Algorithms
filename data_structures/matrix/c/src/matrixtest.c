@@ -5,8 +5,8 @@
 int main(int argc, char* argv[])
 {
     matrix mat;
-    char element;
-    int i, j, errCheck; /*Change element to the appropriate data type you will be workng with.*/
+    char element; /*Change element to the appropriate data type you will be workng with.*/
+    int i, j, errCheck;
     const int ROWS = 3;
     const int COL = 3;
 
