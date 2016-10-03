@@ -5,13 +5,14 @@
 int main(int argc, char* argv[])
 {
     matrix mat;
-    int i, j, errCheck, element; /*Change element to the appropriate data type you will be workng with.*/
-    const int ROWS = atoi(argv[1]);
-    const int COL = atoi(argv[2]);
+    char element;
+    int i, j, errCheck; /*Change element to the appropriate data type you will be workng with.*/
+    const int ROWS = 3;
+    const int COL = 3;
 
     /*You can change sizeof() for any data type you want(integers, char arrays etc)*/
-    errCheck = createMatrix(&mat, ROWS, COL, sizeof(int));
-    
+    errCheck = createMatrix(&mat, ROWS, COL, sizeof(char));
+
     /*If we were not able to successfully allocate memory*/
     if(errCheck == -1)
     {
@@ -27,12 +28,12 @@ int main(int argc, char* argv[])
                Note, when ever you decide to use scanf, make sure that first character you enter is a space else
                a newline will be consumed in the process.
              */
-            errCheck = scanf(" %d", &element);
-            
+            errCheck = scanf(" %c", &element);
+
             /*Make sure that scanf did not fail. Scanf returns an integer based on the number of successful entries. */
             if(errCheck == 1)
             {
-              setElement(&mat, i, j, &element);   
+              setElement(&mat, i, j, &element);
             }
         }
     }
@@ -44,7 +45,9 @@ int main(int argc, char* argv[])
         for(j = 0; j < COL; j++)
         {
             /*Returns void * so I must cast it to the appropriate type.*/
-            printf("%d ", *(int*)getElement(&mat, i, j));
+            element = *(char*)getElement(&mat, i, j);
+
+            printf("%c ", element);
         }
         printf("\n");
     }
