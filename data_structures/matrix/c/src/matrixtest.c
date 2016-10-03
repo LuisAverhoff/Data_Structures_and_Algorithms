@@ -10,7 +10,7 @@ int main(int argc, char* argv[])
     const int ROWS = 3;
     const int COL = 3;
 
-    /*You can change sizeof() for any data type you want(integers, char arrays etc)*/
+    /*You can change sizeof() for any data type you want(integers, char arrays etc). Make sure it matches the type that elements has.*/
     errCheck = createMatrix(&mat, ROWS, COL, sizeof(char));
 
     /*If we were not able to successfully allocate memory*/
