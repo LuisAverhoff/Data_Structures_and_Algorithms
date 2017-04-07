@@ -30,7 +30,7 @@ int main()
 int isPrime(long num)
 {
     int i;
-    int sqrt_limiter = sqrt(num) + 1;
+    int sqrt_limiter = (int)sqrt(num) + 1;
 
     if(num == 2 || num == 3)
     {
