@@ -30,7 +30,7 @@ int main()
 int isPrime(long num)
 {
     int i;
-    float sqrt_limiter = sqrt(num);
+    int sqrt_limiter = sqrt(num) + 1;
 
     if(num == 2 || num == 3)
     {
@@ -54,7 +54,7 @@ int isPrime(long num)
       out for are 5 and 7. This also means that we can simply start at 6 and add plus and minus one to check if the
       current number that we are checking is a prime factor of 5 and 7.
     */
-    for(i = 6; i < sqrt_limiter; i+=6)
+    for(i = 6; i <= sqrt_limiter; i+=6)
     {
        if((num % (i - 1) == 0) || (num % (i + 1) == 0))
        {
